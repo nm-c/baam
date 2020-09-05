@@ -14,6 +14,10 @@ module Baam
 
     attr_writer :level
 
+    def initialize
+      @level = LEVEL.fetch(:trace, 0)
+    end
+
     def log_impl(data)
       raise NotImplementedError
     end
