@@ -44,7 +44,7 @@ module Baam
 
     # :nocov:
     def host
-      ENV.fetch('HOST_HOSTNAME') { Socket.gethostname }
+      @host ||= ENV.fetch('HOST_HOSTNAME') { Socket.gethostname }
     end
     # :nocov:
 
