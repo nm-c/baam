@@ -16,6 +16,7 @@ end
 log_consumers = [
   Baam::LogConsumer.new(Baam::LogStderr.new),
   Baam::LogConsumer.new(Baam::LogSlack.new),
+  Baam::LogConsumer.new(Baam::LogLoggly.new),
 ]
 
 Baam::LogConsumer.run do |connection|
