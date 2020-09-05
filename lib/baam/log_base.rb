@@ -2,15 +2,17 @@
 
 module Baam
   class LogBase
-    LEVEL = {
-      trace: 0,
-      debug: 1,
-      info: 2,
-      notice: 3,
-      warn: 4,
-      error: 5,
-      fatal: 6,
-    }.freeze
+    LEVEL_NAME = %i[
+      trace
+      debug
+      info
+      notice
+      warn
+      error
+      fatal
+    ].freeze
+    LEVEL =
+      LEVEL_NAME.each.with_index.to_h { |level, enum| [level, enum] }.freeze
 
     attr_writer :level
 

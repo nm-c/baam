@@ -8,4 +8,5 @@ module Baam
   autoload :LogNil, 'baam/log_nil'
   autoload :LogMeta, 'baam/log_meta'
   autoload :LogCombined, 'baam/log_combined'
+  autoload :LogStderr, 'baam/log_stderr'
 end
