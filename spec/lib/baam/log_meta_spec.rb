@@ -24,12 +24,24 @@ RSpec.describe Baam::LogMeta do
       subject.meta = meta
       subject.log(data)
     end
+
+    it 'works deeply' do
+      expect(subject).to receive(:log_impl).with(meta: { meta: true, msg: true }).once
+      subject.meta = { meta: { meta: true } }
+      subject.log(meta: { msg: true })
+    end
   end
 
   describe '#put' do
     it 'works' do
       subject.put(meta)
       expect(subject.meta).to eq(meta: meta)
+    end
+
+    it 'works deeply' do
+      subject.put(key: { key1: :value1 })
+      subject.put(key: { key2: :value2 })
+      expect(subject.meta).to eq(meta: { key: { key1: :value1, key2: :value2 } })
     end
   end
 
@@ -42,6 +54,18 @@ RSpec.describe Baam::LogMeta do
           expect(subject.meta).to eq(a: :a, b: :b)
         end
         expect(subject.meta).to eq(a: :a)
+      end
+      expect(subject.meta).to be_empty
+    end
+
+    it 'works deeply' do
+      expect(subject.meta).to be_empty
+      subject.with(meta: { a: :a }) do
+        expect(subject.meta).to eq(meta: { a: :a })
+        subject.with(meta: { b: :b }) do
+          expect(subject.meta).to eq(meta: { a: :a, b: :b })
+        end
+        expect(subject.meta).to eq(meta: { a: :a })
       end
       expect(subject.meta).to be_empty
     end
