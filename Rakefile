@@ -6,7 +6,7 @@ rescue LoadError # rubocop:disable Lint/SuppressedException
 end
 
 begin
-  require "bundler/gem_tasks"
+  require 'bundler/gem_tasks'
 rescue LoadError # rubocop:disable Lint/SuppressedException
 end
 
@@ -23,4 +23,3 @@ begin
   task(:default).prerequisites << task(:rubocop)
 rescue LoadError # rubocop:disable Lint/SuppressedException
 end
-

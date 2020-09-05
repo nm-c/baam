@@ -1,4 +1,6 @@
-require "baam/version"
+# frozen_string_literal: true
+
+require 'baam/version'
 
 module Baam
   class Error < StandardError; end
