@@ -41,5 +41,9 @@ module Baam
     def put_host
       put(host: host)
     end
+
+    def put_name(name)
+      put(name: name)
+    end
   end
 end

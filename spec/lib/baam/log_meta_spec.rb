@@ -78,4 +78,11 @@ RSpec.describe Baam::LogMeta do
       expect(subject.meta).to eq(meta: { host: 'hostname' })
     end
   end
+
+  describe '#put_name' do
+    it 'works' do
+      subject.put_name('name')
+      expect(subject.meta).to eq(meta: { name: 'name' })
+    end
+  end
 end
