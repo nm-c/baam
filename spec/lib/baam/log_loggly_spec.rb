@@ -5,13 +5,21 @@ RSpec.describe Baam::LogLoggly do
 
   subject { described_class.new(url) }
 
+  before do
+    @localtime = ENV.delete('LOCALTIME')
+  end
+
+  after do
+    ENV['LOCALTIME'] = @localtime if @localtime
+  end
+
   describe '#format' do
     it 'works with msg' do
       expect(subject.format(msg: 'msg')).to eq('{"msg":"msg"}')
     end
 
     it 'works with timestamp' do
-      expect(subject.format(ts: 1234.0)).to eq('{"ts":"1970-01-01T00:20:34+00:00"}')
+      expect(subject.format(ts: 1234.0)).to eq('{"timestamp":"1970-01-01T00:20:34+00:00"}')
     end
   end
 

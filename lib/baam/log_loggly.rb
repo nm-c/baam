@@ -23,9 +23,10 @@ module Baam
     def format(data)
       data = data.deep_dup
       if data.key?(:ts)
-        ts = data.fetch(:ts)
-        time = Time.at(ts).utc.strftime('%FT%T%:z')
-        data[:ts] = time
+        localtime = ENV.fetch('LOCALTIME', '+00:00')
+        ts = data.delete(:ts)
+        time = Time.at(ts).localtime(localtime).iso8601
+        data[:timestamp] = time
       end
       Oj.dump(data, mode: :compat)
     end
