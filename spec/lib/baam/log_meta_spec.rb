@@ -70,4 +70,12 @@ RSpec.describe Baam::LogMeta do
       expect(subject.meta).to be_empty
     end
   end
+
+  describe '#put_host' do
+    it 'works' do
+      expect(subject).to receive(:host).and_return('hostname')
+      subject.put_host
+      expect(subject.meta).to eq(meta: { host: 'hostname' })
+    end
+  end
 end

@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/hash/deep_merge'
+require 'socket'
 
 module Baam
   class LogMeta < LogBase
@@ -31,6 +32,14 @@ module Baam
       yield
     ensure
       @meta = orig_meta
+    end
+
+    def host
+      ENV.fetch('HOST_HOSTNAME') { Socket.gethostname }
+    end
+
+    def put_host
+      put(host: host)
     end
   end
 end
