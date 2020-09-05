@@ -18,5 +18,17 @@ module Baam
     def log_impl(data)
       @logger.log(data)
     end
+
+    def put(data)
+      (@meta[:meta] ||= {}).merge!(**data)
+    end
+
+    def with(meta)
+      orig_meta = @meta
+      @meta = @meta.merge(**meta)
+      yield
+    ensure
+      @meta = orig_meta
+    end
   end
 end
