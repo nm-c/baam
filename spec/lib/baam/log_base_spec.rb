@@ -21,7 +21,7 @@ RSpec.describe Baam::LogBase do
 
     it 'is not implemented' do
       expect do
-        subject.log(msg)
+        subject.log(data)
       end.to raise_error(NotImplementedError)
     end
   end
@@ -53,6 +53,42 @@ RSpec.describe Baam::LogBase do
     it 'does not log' do
       subject.level = :info
       subject.log(level: :debug, msg: msg)
+    end
+  end
+
+  describe 'log with level' do
+    it 'works with string' do
+      expect(subject).to receive(:log).with(level: :trace, msg: msg)
+      subject.trace(msg)
+      expect(subject).to receive(:log).with(level: :debug, msg: msg)
+      subject.debug(msg)
+      expect(subject).to receive(:log).with(level: :info, msg: msg)
+      subject.info(msg)
+      expect(subject).to receive(:log).with(level: :notice, msg: msg)
+      subject.notice(msg)
+      expect(subject).to receive(:log).with(level: :warn, msg: msg)
+      subject.warn(msg)
+      expect(subject).to receive(:log).with(level: :error, msg: msg)
+      subject.error(msg)
+      expect(subject).to receive(:log).with(level: :fatal, msg: msg)
+      subject.fatal(msg)
+    end
+
+    it 'works with data' do
+      expect(subject).to receive(:log).with(level: :trace, msg: msg)
+      subject.trace(data)
+      expect(subject).to receive(:log).with(level: :debug, msg: msg)
+      subject.debug(data)
+      expect(subject).to receive(:log).with(level: :info, msg: msg)
+      subject.info(data)
+      expect(subject).to receive(:log).with(level: :notice, msg: msg)
+      subject.notice(data)
+      expect(subject).to receive(:log).with(level: :warn, msg: msg)
+      subject.warn(data)
+      expect(subject).to receive(:log).with(level: :error, msg: msg)
+      subject.error(data)
+      expect(subject).to receive(:log).with(level: :fatal, msg: msg)
+      subject.fatal(data)
     end
   end
 end

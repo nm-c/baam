@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative '../baam'
 
 LS = Baam::LogMeta.new(Baam::LogStderr.new)

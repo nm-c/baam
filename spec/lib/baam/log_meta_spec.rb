@@ -93,7 +93,7 @@ RSpec.describe Baam::LogMeta do
     it 'works' do
       subject.append_timestamp
       Timecop.freeze(Time.at(0)) do
-        expect(subject.manipulate_data({})).to eq(ts: 0.0)
+        expect(subject.manipulate_meta({})).to eq(ts: 0.0)
       end
     end
   end

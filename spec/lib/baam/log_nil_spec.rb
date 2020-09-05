@@ -1,8 +1,8 @@
 # frozen_string_literal: true
 
 RSpec.describe Baam::LogNil do
-  let(:msg) { 'msg' }
+  let(:data) { { msg: 'msg' } }
   it '#log' do
-    subject.log(msg)
+    subject.log(data)
   end
 end

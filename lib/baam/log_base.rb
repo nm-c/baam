@@ -25,7 +25,6 @@ module Baam
     end
 
     def log(data)
-      data = manipulate_data(data)
       return unless log?(data.fetch(:level, :debug))
 
       log_impl(data)
@@ -37,6 +36,13 @@ module Baam
 
     def log?(current_level)
       LEVEL.fetch(@level, 0) <= LEVEL.fetch(current_level, 0)
+    end
+
+    LEVEL_NAME.each do |level|
+      define_method(level) do |data|
+        data = manipulate_data(data)
+        log(data.merge(level: level))
+      end
     end
   end
 end

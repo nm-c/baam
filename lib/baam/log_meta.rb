@@ -15,15 +15,19 @@ module Baam
       @append_timestamp = false
     end
 
-    def manipulate_data(data)
+    def manipulate_meta(data)
       @meta.deep_merge(
         **(@append_timestamp ? { ts: Time.now.to_f } : {}),
-        **super,
+        **data,
       )
     end
 
     def log_impl(data)
       @logger.log(data)
+    end
+
+    def log(data)
+      super(manipulate_meta(data))
     end
 
     def put(data)
