@@ -38,9 +38,11 @@ module Baam
       @meta = orig_meta
     end
 
+    # :nocov:
     def host
       ENV.fetch('HOST_HOSTNAME') { Socket.gethostname }
     end
+    # :nocov:
 
     def put_host
       put(host: host)
