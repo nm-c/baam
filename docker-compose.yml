@@ -1,0 +1,40 @@
+version: '2.3'
+x-logging: &logging
+  logging:
+    options:
+      max-size: '10m'
+      max-file: '3'
+
+services:
+  redis:
+    <<: *logging
+    image: redis:alpine
+    command: sh -c 'echo never > /sys/kernel/mm/transparent_hugepage/enabled; exec redis-server --requirepass $$REDIS_PASS'
+    sysctls:
+      - net.core.somaxconn=511
+    privileged: true
+    environment:
+      - REDIS_PASS
+    volumes:
+      - redis:/data
+    ports:
+      - '6379:6379'
+    restart: always
+  mq:
+    <<: *logging
+    image: rabbitmq:management-alpine
+    hostname: mq
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    environment:
+      - RABBITMQ_HIPE_COMPILE=1
+      - RABBITMQ_DEFAULT_USER
+      - RABBITMQ_DEFAULT_PASS
+    volumes:
+      - mq:/var/lib/rabbitmq
+    restart: always
+
+volumes:
+  redis:
+  mq:
