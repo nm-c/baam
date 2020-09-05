@@ -96,3 +96,6 @@ RSpec.configure do |config|
   # as the one that triggered the failure.
   Kernel.srand config.seed
 end
+
+require 'baam'
+Dir[File.expand_path('support/**/*.rb', __dir__)].sort.each { |file| require file }
