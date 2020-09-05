@@ -14,8 +14,11 @@ module Baam
     end
 
     def format(data)
+      short_level =
+        (data.delete(:level) || LEVEL_NAME.first).to_s[0, 1].upcase
+      time = Time.at(data.delete(:ts) || 0).utc.strftime('%T')
       msg = data.delete(:msg)
-      "#{Oj.dump(data)} #{msg}"
+      "#{short_level}]#{time} #{Oj.dump(data)} #{msg}"
     end
 
     def write(data)

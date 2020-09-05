@@ -5,7 +5,7 @@ RSpec.describe Baam::LogStderr do
 
   describe '#format' do
     it 'works' do
-      expect(subject.format(data)).to eq('{} msg')
+      expect(subject.format(data)).to eq('T]00:00:00 {} msg')
     end
   end
 
