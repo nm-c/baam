@@ -1,8 +1,7 @@
 # frozen_string_literal: true
 
 require 'baam/version'
+require 'baam/log'
 
 module Baam
-  class Error < StandardError; end
-  # Your code goes here...
 end
