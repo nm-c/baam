@@ -7,15 +7,15 @@ RSpec.describe Baam::LogSlack do
 
   describe '#format' do
     it 'works with msg' do
-      expect(subject.format(msg: 'msg')).to eq(slack: {}, msg: '00:00:00 msg')
+      expect(subject.format(msg: 'msg')).to eq(slack: {}, msg: '01 00:00:00 msg')
     end
 
     it 'works with slack' do
-      expect(subject.format(slack: { channel: :channel })).to eq(slack: { channel: :channel }, msg: '00:00:00 ')
+      expect(subject.format(slack: { channel: :channel })).to eq(slack: { channel: :channel }, msg: '01 00:00:00 ')
     end
 
     it 'works with timestamp' do
-      expect(subject.format(ts: 1234.0)).to eq(slack: {}, msg: '00:20:34 ')
+      expect(subject.format(ts: 1234.0)).to eq(slack: {}, msg: '01 00:20:34 ')
     end
   end
 

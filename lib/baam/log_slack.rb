@@ -19,7 +19,9 @@ module Baam
     def format(data)
       data = data.deep_dup
       slack = data.delete(:slack) || {}
-      time = Time.at(data.delete(:ts) || 0).utc.strftime('%T')
+      localtime = ENV.fetch('LOCALTIME', '+00:00')
+      ts = data.delete(:ts) || 0
+      time = Time.at(ts).localtime(localtime).strftime('%d %T')
       msg = data.delete(:msg)
       {
         slack: slack,

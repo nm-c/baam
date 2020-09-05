@@ -18,7 +18,9 @@ module Baam
       data = data.deep_dup
       short_level =
         (data.delete(:level) || LEVEL_NAME.first).to_s[0, 1].upcase
-      time = Time.at(data.delete(:ts) || 0).utc.strftime('%T')
+      localtime = ENV.fetch('LOCALTIME', '+00:00')
+      ts = data.delete(:ts) || 0
+      time = Time.at(ts).localtime(localtime).strftime('%T%z')
       msg = data.delete(:msg)
       "#{short_level}]#{time} #{Oj.dump(data, mode: :compat)} #{msg}\n"
     end

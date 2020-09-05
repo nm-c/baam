@@ -5,19 +5,19 @@ RSpec.describe Baam::LogStderr do
 
   describe '#format' do
     it 'works with msg' do
-      expect(subject.format(data)).to eq("T]00:00:00 {} msg\n")
+      expect(subject.format(data)).to eq("T]00:00:00+0000 {} msg\n")
     end
 
     it 'works with level' do
-      expect(subject.format(level: :notice)).to eq("N]00:00:00 {} \n")
+      expect(subject.format(level: :notice)).to eq("N]00:00:00+0000 {} \n")
     end
 
     it 'works with timestamp' do
-      expect(subject.format(ts: 1234.0)).to eq("T]00:20:34 {} \n")
+      expect(subject.format(ts: 1234.0)).to eq("T]00:20:34+0000 {} \n")
     end
 
     it 'works with meta' do
-      expect(subject.format(key: :value)).to eq("T]00:00:00 {\"key\":\"value\"} \n")
+      expect(subject.format(key: :value)).to eq("T]00:00:00+0000 {\"key\":\"value\"} \n")
     end
   end
 
