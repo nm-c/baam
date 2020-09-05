@@ -7,10 +7,12 @@ LS.put_host
 LS.append_timestamp
 
 L = Baam::LogMeta.new(
-  Baam::LogCombined.new([
-                          Baam::LogStderr.new,
-                          Baam::LogQueue.new,
-                        ]),
+  Baam::LogCombined.new(
+    [
+      Baam::LogStderr.new,
+      Baam::LogQueue.new,
+    ],
+  ),
 )
 L.put_host
 L.append_timestamp

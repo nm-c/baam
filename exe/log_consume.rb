@@ -13,10 +13,13 @@ at_exit do
   LS.notice('Finished')
 end
 
-log_consumer = Baam::LogConsumer.new(Baam::LogStderr.new)
+log_consumers = [
+  Baam::LogConsumer.new(Baam::LogStderr.new),
+  Baam::LogConsumer.new(Baam::LogSlack.new),
+]
 
 Baam::LogConsumer.run do |connection|
-  [
-    log_consumer.log(connection),
-  ].map(&:join)
+  log_consumers.map do |log|
+    log.log(connection)
+  end.map(&:join)
 end
