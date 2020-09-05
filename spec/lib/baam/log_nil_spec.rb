@@ -2,8 +2,7 @@
 
 RSpec.describe Baam::LogNil do
   let(:msg) { 'msg' }
-  it 'works' do
-    expect(subject).to receive(:log_impl).with(msg)
+  it '#log' do
     subject.log(msg)
   end
 end
