@@ -2,17 +2,57 @@
 
 RSpec.describe Baam::LogBase do
   let(:msg) { 'msg' }
+  let(:data) { { msg: msg } }
+
+  describe '#manipulate_data' do
+    it 'works with string' do
+      expect(subject.manipulate_data(msg)).to eq(data)
+    end
+    it 'works with hash' do
+      expect(subject.manipulate_data(data)).to eq(data)
+    end
+  end
 
   describe '#log' do
     it 'calls log_impl' do
-      expect(subject).to receive(:log_impl).with(msg)
-      subject.log(msg)
+      expect(subject).to receive(:log_impl).with(data)
+      subject.log(data)
     end
 
     it 'is not implemented' do
       expect do
         subject.log(msg)
       end.to raise_error(NotImplementedError)
+    end
+  end
+
+  describe '#level' do
+    describe '#log?' do
+      it 'is truthy with same level' do
+        subject.level = :trace
+        expect(subject.log?(:trace)).to be_truthy
+      end
+
+      it 'is truthy' do
+        subject.level = :info
+        expect(subject.log?(:info)).to be_truthy
+      end
+
+      it 'is falsy' do
+        subject.level = :notice
+        expect(subject.log?(:info)).to be_falsy
+      end
+    end
+
+    it 'logs' do
+      expect(subject).to receive(:log_impl).once
+      subject.level = :trace
+      subject.log(level: :trace, msg: msg)
+    end
+
+    it 'does not log' do
+      subject.level = :info
+      subject.log(level: :debug, msg: msg)
     end
   end
 end
