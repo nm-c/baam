@@ -2,7 +2,6 @@
 
 begin
   require 'simplecov'
-  SimpleCov.start
 rescue LoadError # rubocop:disable Lint/SuppressedException
 end
 
