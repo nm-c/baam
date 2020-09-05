@@ -3,6 +3,14 @@
 RSpec.describe Baam::LogStderr do
   let(:data) { { msg: 'msg' } }
 
+  before do
+    @localtime = ENV.delete('LOCALTIME')
+  end
+
+  after do
+    ENV['LOCALTIME'] = @localtime if @localtime
+  end
+
   describe '#format' do
     it 'works with msg' do
       expect(subject.format(data)).to eq("T]00:00:00+0000 {} msg\n")

@@ -5,6 +5,14 @@ RSpec.describe Baam::LogSlack do
 
   subject { described_class.new(slack_url) }
 
+  before do
+    @localtime = ENV.delete('LOCALTIME')
+  end
+
+  after do
+    ENV['LOCALTIME'] = @localtime if @localtime
+  end
+
   describe '#format' do
     it 'works with msg' do
       expect(subject.format(msg: 'msg')).to eq(slack: {}, msg: '01 00:00:00 msg')
