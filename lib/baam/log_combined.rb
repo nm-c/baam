@@ -2,7 +2,7 @@
 
 module Baam
   class LogCombined < LogBase
-    attr_writer :loggers
+    attr_accessor :loggers
 
     def initialize(loggers = [])
       super()

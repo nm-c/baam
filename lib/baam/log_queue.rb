@@ -5,12 +5,15 @@ require 'oj'
 
 module Baam
   class LogQueue < LogBase
+    EXCHANGE_NAME = 'log'
+
     def initialize
+      super
       @connection = Bunny.new
       @connection.start
       @channel = @connection.create_channel
 
-      @exchange = @channel.topic('log')
+      @exchange = @channel.topic(EXCHANGE_NAME)
 
       at_exit do
         @channel.close

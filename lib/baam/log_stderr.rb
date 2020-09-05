@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'active_support/core_ext/object/deep_dup'
 require 'oj'
 
 module Baam
@@ -14,6 +15,7 @@ module Baam
     end
 
     def format(data)
+      data = data.deep_dup
       short_level =
         (data.delete(:level) || LEVEL_NAME.first).to_s[0, 1].upcase
       time = Time.at(data.delete(:ts) || 0).utc.strftime('%T')

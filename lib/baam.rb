@@ -10,4 +10,5 @@ module Baam
   autoload :LogCombined, 'baam/log_combined'
   autoload :LogStderr, 'baam/log_stderr'
   autoload :LogQueue, 'baam/log_queue'
+  autoload :LogConsumer, 'baam/log_consumer'
 end
