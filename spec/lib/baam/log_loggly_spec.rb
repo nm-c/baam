@@ -19,7 +19,7 @@ RSpec.describe Baam::LogLoggly do
     end
 
     it 'works with timestamp' do
-      expect(subject.format(ts: 1234.0)).to eq('{"timestamp":"1970-01-01T00:20:34+00:00"}')
+      expect(subject.format(ts: 1234.0)).to eq('{"timestamp":"1970-01-01T00:20:34.000+00:00"}')
     end
   end
 

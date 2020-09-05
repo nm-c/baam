@@ -25,7 +25,7 @@ module Baam
       if data.key?(:ts)
         localtime = ENV.fetch('LOCALTIME', '+00:00')
         ts = data.delete(:ts)
-        time = Time.at(ts).localtime(localtime).iso8601
+        time = Time.at(ts).localtime(localtime).iso8601(3)
         data[:timestamp] = time
       end
       Oj.dump(data, mode: :compat)
