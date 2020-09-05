@@ -41,7 +41,7 @@ module Baam
     LEVEL_NAME.each do |level|
       define_method(level) do |data|
         data = manipulate_data(data)
-        log(data.merge(level: level))
+        log(level: level, **data)
       end
     end
   end
