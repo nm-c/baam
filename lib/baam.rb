@@ -9,4 +9,5 @@ module Baam
   autoload :LogMeta, 'baam/log_meta'
   autoload :LogCombined, 'baam/log_combined'
   autoload :LogStderr, 'baam/log_stderr'
+  autoload :LogQueue, 'baam/log_queue'
 end
