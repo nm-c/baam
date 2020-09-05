@@ -7,4 +7,5 @@ module Baam
   autoload :LogBase, 'baam/log_base'
   autoload :LogNil, 'baam/log_nil'
   autoload :LogMeta, 'baam/log_meta'
+  autoload :LogCombined, 'baam/log_combined'
 end
