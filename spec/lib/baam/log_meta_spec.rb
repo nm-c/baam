@@ -1,5 +1,8 @@
 # frozen_string_literal: true
 
+require 'time'
+require 'timecop'
+
 RSpec.describe Baam::LogMeta do
   let(:data) { { msg: 'msg' } }
   let(:meta) { { key: :value } }
@@ -83,6 +86,15 @@ RSpec.describe Baam::LogMeta do
     it 'works' do
       subject.put_name('name')
       expect(subject.meta).to eq(meta: { name: 'name' })
+    end
+  end
+
+  describe '#append_timestamp' do
+    it 'works' do
+      subject.append_timestamp
+      Timecop.freeze(Time.at(0)) do
+        expect(subject.manipulate_data({})).to eq(ts: 0.0)
+      end
     end
   end
 end
