@@ -13,4 +13,5 @@ module Baam
   autoload :LogConsumer, 'baam/log_consumer'
   autoload :LogSlack, 'baam/log_slack'
   autoload :LogLoggly, 'baam/log_loggly'
+  autoload :LogFilter, 'baam/log_filter'
 end

@@ -20,3 +20,6 @@ Style/TrailingCommaInArguments:
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*'
+
+Style/MultilineBlockChain:
+  Enabled: false
