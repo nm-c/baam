@@ -46,9 +46,10 @@ RSpec.describe Baam::LogFilter do
 
   subject do
     described_class.new(
-      group: {
+      option: {
         a: { period: 3, expires_in: 60 },
         b: { period: 2 },
+        c: { expires_in: 3 },
       },
     )
   end
@@ -119,6 +120,17 @@ RSpec.describe Baam::LogFilter do
       Timecop.freeze(Time.at(60)) do
         expect(subject.log?(filter: { key: :a })).to be_truthy
         expect(subject.log?(filter: { key: :b })).to be_falsy
+      end
+    end
+
+    it 'works with only mark' do
+      Timecop.freeze(Time.at(0)) do
+        expect(subject.log?(filter: { key: :c })).to be_truthy
+        10.times { expect(subject.log?(filter: { key: :c })).to be_falsy }
+      end
+      Timecop.freeze(Time.at(3)) do
+        expect(subject.log?(filter: { key: :c })).to be_truthy
+        10.times { expect(subject.log?(filter: { key: :c })).to be_falsy }
       end
     end
 

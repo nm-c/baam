@@ -26,7 +26,7 @@ module Baam
         end
       end
 
-      def next_period(name, period: 1, expires_in: nil, **options)
+      def next_period(name, period: Float::INFINITY, expires_in: nil, **options)
         with_mark(name, expires_in, **options) do |mark|
           modify(name, **options) do |num|
             mark ? (num + 1) % period : 0
@@ -41,14 +41,14 @@ module Baam
 
     def initialize(
       logger: LogNil.new, namespace: 'log_filter',
-      group: {}, group_by: nil
+      option: {}, group_by: nil
     )
       super()
       @logger = logger
       @store = ActiveSupport::Cache.lookup_store(
         MemoryCountStore.new(namespace: namespace),
       )
-      @group = group
+      @option = option
       @group_by = group_by || lambda do |**data|
         data.fetch(:filter, {}).fetch(:key, nil)
       end
@@ -62,7 +62,9 @@ module Baam
       return false unless super
 
       group = @group_by.call(**data)
-      @store.next_period(group, **@group.fetch(group, {})).zero?
+      option = @option.fetch(group, {})
+      option = { period: 1 } if option.empty?
+      @store.next_period(group, **option).zero?
     end
   end
 end

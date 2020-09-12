@@ -18,8 +18,9 @@ log_consumers = [
   Baam::LogConsumer.new(
     Baam::LogFilter.new(
       logger: Baam::LogSlack.new,
-      group: {
-        heavy: { period: 3, expires_in: 60 },
+      option: {
+        heavy1: { period: 3, expires_in: 60 },
+        heavy2: { expires_in: 3 },
       },
       group_by: ->(data) { data.fetch(:group, :default) },
     ),
