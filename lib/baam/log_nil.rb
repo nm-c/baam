@@ -2,6 +2,6 @@
 
 module Baam
   class LogNil < LogBase
-    def log_impl(data); end
+    def log_impl(**data); end
   end
 end

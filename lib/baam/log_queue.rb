@@ -21,7 +21,7 @@ module Baam
       end
     end
 
-    def log_impl(data)
+    def log_impl(**data)
       @exchange.publish(Oj.dump(data))
     end
   end

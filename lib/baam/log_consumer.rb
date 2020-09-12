@@ -17,7 +17,7 @@ module Baam
     end
 
     def log_impl(body, _info, _prop)
-      @logger.log(Oj.load(body))
+      @logger.log(**Oj.load(body))
     end
 
     def log(connection, &block) # rubocop:disable Metrics/MethodLength

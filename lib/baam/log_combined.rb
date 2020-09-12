@@ -9,8 +9,8 @@ module Baam
       @loggers = loggers
     end
 
-    def log_impl(data)
-      @loggers.map { |logger| logger.log(data) }
+    def log_impl(**data)
+      @loggers.map { |logger| logger.log(**data) }
     end
   end
 end

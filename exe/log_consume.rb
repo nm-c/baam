@@ -15,7 +15,15 @@ end
 
 log_consumers = [
   Baam::LogConsumer.new(Baam::LogStderr.new),
-  Baam::LogConsumer.new(Baam::LogSlack.new),
+  Baam::LogConsumer.new(
+    Baam::LogFilter.new(
+      logger: Baam::LogSlack.new,
+      group: {
+        heavy: { period: 3, expires_in: 60 },
+      },
+      group_by: ->(data) { data.fetch(:group, :default) },
+    ),
+  ),
   Baam::LogConsumer.new(Baam::LogLoggly.new),
 ]
 

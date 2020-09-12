@@ -54,6 +54,10 @@ module Baam
       end
     end
 
+    def log_impl(**data)
+      @logger.log(**data)
+    end
+
     def log?(**data)
       return false unless super
 

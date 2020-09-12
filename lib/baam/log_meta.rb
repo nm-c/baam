@@ -22,19 +22,19 @@ module Baam
       )
     end
 
-    def log_impl(data)
-      @logger.log(data)
+    def log_impl(**data)
+      @logger.log(**data)
     end
 
-    def log(data)
-      super(manipulate_meta(data))
+    def log(**data)
+      super(**manipulate_meta(data))
     end
 
-    def put(data)
+    def put(**data)
       @meta = @meta.deep_merge(meta: data)
     end
 
-    def with(meta)
+    def with(**meta)
       orig_meta = @meta
       @meta = @meta.deep_merge(**meta)
       yield

@@ -11,12 +11,12 @@ module Baam
       @slack_url = slack_url
     end
 
-    def log_impl(data)
-      data = format(data)
+    def log_impl(**data)
+      data = format(**data)
       Slack::Notifier.new(@slack_url, **data[:slack]).ping(data[:msg])
     end
 
-    def format(data)
+    def format(**data)
       data = data.deep_dup
       slack = data.delete(:slack) || {}
       localtime = ENV.fetch('LOCALTIME', '+00:00')

@@ -11,8 +11,8 @@ module Baam
       @url = url
     end
 
-    def log_impl(data)
-      data = format(data)
+    def log_impl(**data)
+      data = format(**data)
       HTTParty.post(
         @url,
         headers: { 'Content-Type': 'application/json' },
@@ -20,7 +20,7 @@ module Baam
       )
     end
 
-    def format(data)
+    def format(**data)
       data = data.deep_dup
       if data.key?(:ts)
         localtime = ENV.fetch('LOCALTIME', '+00:00')

@@ -10,11 +10,11 @@ module Baam
       @io = io
     end
 
-    def log_impl(data)
-      write(format(data))
+    def log_impl(**data)
+      write(format(**data))
     end
 
-    def format(data)
+    def format(**data)
       data = data.deep_dup
       short_level =
         (data.delete(:level) || LEVEL_NAME.first).to_s[0, 1].upcase

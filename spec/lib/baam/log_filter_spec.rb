@@ -42,7 +42,7 @@ RSpec.describe Baam::LogFilter do
     end
   end
 
-  let(:data) { { msg: msg } }
+  let(:data) { { msg: 'msg' } }
 
   subject do
     described_class.new(
@@ -51,6 +51,20 @@ RSpec.describe Baam::LogFilter do
         b: { period: 2 },
       },
     )
+  end
+
+  describe '#log' do
+    it 'calls #logger#log' do
+      logger = Baam::LogBase.new
+      expect(logger).to receive(:log).with(**data).once
+
+      subject.logger = logger
+      subject.log(data)
+    end
+
+    it 'does not raise any error' do
+      subject.log(data)
+    end
   end
 
   describe '#log?' do
