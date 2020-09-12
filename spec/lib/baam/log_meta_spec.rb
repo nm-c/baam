@@ -13,11 +13,11 @@ RSpec.describe Baam::LogMeta do
       expect(logger).to receive(:log).with(**data).once
 
       subject.logger = logger
-      subject.log(data)
+      subject.log(**data)
     end
 
     it 'does not raise any error' do
-      subject.log(data)
+      subject.log(**data)
     end
   end
 
@@ -25,7 +25,7 @@ RSpec.describe Baam::LogMeta do
     it 'works' do
       expect(subject).to receive(:log_impl).with(**meta, **data).once
       subject.meta = meta
-      subject.log(data)
+      subject.log(**data)
     end
 
     it 'works deeply' do
@@ -37,7 +37,7 @@ RSpec.describe Baam::LogMeta do
 
   describe '#put' do
     it 'works' do
-      subject.put(meta)
+      subject.put(**meta)
       expect(subject.meta).to eq(meta: meta)
     end
 

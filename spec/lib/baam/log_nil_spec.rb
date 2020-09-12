@@ -3,6 +3,6 @@
 RSpec.describe Baam::LogNil do
   let(:data) { { msg: 'msg' } }
   it '#log' do
-    subject.log(data)
+    subject.log(**data)
   end
 end

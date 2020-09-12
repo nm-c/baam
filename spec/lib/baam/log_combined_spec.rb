@@ -10,7 +10,7 @@ RSpec.describe Baam::LogCombined do
         expect(logger).to receive(:log).with(data)
       end
       subject.loggers = loggers
-      subject.log(data)
+      subject.log(**data)
     end
   end
 end

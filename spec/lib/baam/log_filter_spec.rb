@@ -59,11 +59,11 @@ RSpec.describe Baam::LogFilter do
       expect(logger).to receive(:log).with(**data).once
 
       subject.logger = logger
-      subject.log(data)
+      subject.log(**data)
     end
 
     it 'does not raise any error' do
-      subject.log(data)
+      subject.log(**data)
     end
   end
 

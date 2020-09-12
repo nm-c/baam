@@ -13,7 +13,7 @@ RSpec.describe Baam::LogStderr do
 
   describe '#format' do
     it 'works with msg' do
-      expect(subject.format(data)).to eq("T]00:00:00+0000 {} msg\n")
+      expect(subject.format(**data)).to eq("T]00:00:00+0000 {} msg\n")
     end
 
     it 'works with level' do
@@ -33,7 +33,7 @@ RSpec.describe Baam::LogStderr do
     it 'calls #write and #format' do
       expect(subject).to receive(:write).once
       expect(subject).to receive(:format).with(data).once
-      subject.log_impl(data)
+      subject.log_impl(**data)
     end
   end
 

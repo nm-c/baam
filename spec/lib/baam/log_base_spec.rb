@@ -16,12 +16,12 @@ RSpec.describe Baam::LogBase do
   describe '#log' do
     it 'calls log_impl' do
       expect(subject).to receive(:log_impl).with(data)
-      subject.log(data)
+      subject.log(**data)
     end
 
     it 'is not implemented' do
       expect do
-        subject.log(data)
+        subject.log(**data)
       end.to raise_error(NotImplementedError)
     end
   end
