@@ -30,17 +30,27 @@ RSpec.describe Baam::LogBase do
     describe '#log?' do
       it 'is truthy with same level' do
         subject.level = :trace
-        expect(subject.log?(:trace)).to be_truthy
+        expect(subject.log?(level: :trace)).to be_truthy
       end
 
       it 'is truthy' do
         subject.level = :info
-        expect(subject.log?(:info)).to be_truthy
+        expect(subject.log?(level: :info)).to be_truthy
       end
 
       it 'is falsy' do
         subject.level = :notice
-        expect(subject.log?(:info)).to be_falsy
+        expect(subject.log?(level: :info)).to be_falsy
+      end
+
+      it 'works with default' do
+        subject.level = :debug
+        expect(subject.log?).to be_truthy
+      end
+
+      it 'works with default' do
+        subject.level = :info
+        expect(subject.log?).to be_falsy
       end
     end
 

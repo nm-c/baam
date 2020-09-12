@@ -20,21 +20,22 @@ module Baam
       @level = LEVEL.fetch(:trace, 0)
     end
 
-    def log_impl(data)
+    def log_impl(**data)
       raise NotImplementedError
     end
 
-    def log(data)
-      return unless log?(data.fetch(:level, :debug))
+    def log(**data)
+      return unless log?(**data)
 
-      log_impl(data)
+      log_impl(**data)
     end
 
     def manipulate_data(data)
       data.is_a?(Hash) ? data : { msg: data }
     end
 
-    def log?(current_level)
+    def log?(**data)
+      current_level = data.fetch(:level, :debug)
       LEVEL.fetch(@level, 0) <= LEVEL.fetch(current_level, 0)
     end
 
