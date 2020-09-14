@@ -5,6 +5,8 @@ require 'dotenv/load'
 require 'baam'
 require 'baam/simple'
 
+Baam::L.level = :debug
+
 LS.put_name('LogConsume')
 
 LS.notice('Started')

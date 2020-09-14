@@ -27,6 +27,8 @@ module Baam
           exchange = channel.topic(LogQueue::EXCHANGE_NAME)
           queue.bind(exchange, routing_key: '#')
           queue.subscribe(block: true) do |info, prop, body|
+            L.trace(info: info, prop: prop, body: body)
+            L.debug(queue: info.consumer.queue.name, body: Oj.load(body))
             block.call(body, info, prop)
           end
         end

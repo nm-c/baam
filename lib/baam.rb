@@ -14,4 +14,7 @@ module Baam
   autoload :LogSlack, 'baam/log_slack'
   autoload :LogLoggly, 'baam/log_loggly'
   autoload :LogFilter, 'baam/log_filter'
+
+  L = LogStderr.new
+  L.level = :warn
 end
