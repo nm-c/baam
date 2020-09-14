@@ -22,7 +22,8 @@ module Baam
       ts = data.delete(:ts) || 0
       time = Time.at(ts).localtime(localtime).strftime('%T%z')
       msg = data.delete(:msg)
-      "#{short_level}]#{time} #{Oj.dump(data, mode: :compat)} #{msg}\n"
+      "#{short_level}]#{time} " \
+      "#{Oj.dump(data, mode: :rails, bigdecimal_as_decimal: true)} #{msg}\n"
     end
 
     def write(data)

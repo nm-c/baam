@@ -28,7 +28,7 @@ module Baam
         time = Time.at(ts).localtime(localtime).iso8601(3)
         data[:timestamp] = time
       end
-      Oj.dump(data, mode: :compat)
+      Oj.dump(data, mode: :rails, bigdecimal_as_decimal: true)
     end
   end
 end

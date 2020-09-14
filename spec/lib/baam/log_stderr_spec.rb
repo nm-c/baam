@@ -27,6 +27,10 @@ RSpec.describe Baam::LogStderr do
     it 'works with meta' do
       expect(subject.format(key: :value)).to eq("T]00:00:00+0000 {\"key\":\"value\"} \n")
     end
+
+    it 'works with bigdecimal' do
+      expect(subject.format(value: BigDecimal('0.123456789'))).to eq("T]00:00:00+0000 {\"value\":0.123456789e0} \n")
+    end
   end
 
   describe '#log_impl' do
