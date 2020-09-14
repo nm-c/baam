@@ -15,7 +15,7 @@ module Baam
   autoload :LogLoggly, 'baam/log_loggly'
   autoload :LogFilter, 'baam/log_filter'
 
-  L = LogStderr.new
+  L = LogMeta.new(LogStderr.new)
   L.append_timestamp
   L.level = :warn
 end
