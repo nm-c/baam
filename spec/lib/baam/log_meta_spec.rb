@@ -82,6 +82,14 @@ RSpec.describe Baam::LogMeta do
     end
   end
 
+  describe '#put_ip' do
+    it 'works' do
+      expect(subject).to receive(:ip).and_return('127.0.0.1')
+      subject.put_ip
+      expect(subject.meta).to eq(meta: { ip: '127.0.0.1' })
+    end
+  end
+
   describe '#put_name' do
     it 'works' do
       subject.put_name('name')

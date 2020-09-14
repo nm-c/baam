@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/hash/deep_merge'
+require 'httparty'
 require 'socket'
 
 module Baam
@@ -50,6 +51,16 @@ module Baam
 
     def put_host
       put(host: host)
+    end
+
+    # :nocov:
+    def ip
+      @ip ||= HTTParty.get('http://api.ipify.org').body
+    end
+    # :nocov:
+
+    def put_ip
+      put(ip: ip)
     end
 
     def put_name(name)
